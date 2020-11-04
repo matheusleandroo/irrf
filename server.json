@@ -1,0 +1,60 @@
+{
+  "employees": [
+    {
+      "id": "a874cfb4-d89c-4064-9969-1deff9ddac17",
+      "nome": "Letícia Aurora Farias",
+      "cpf": "936.938.039-60",
+      "salario": 998,
+      "desconto": 74.85,
+      "dependentes": 2
+    },
+    {
+      "id": "e955428a-0397-47f8-a4b5-e2ac4c8bb940",
+      "nome": "Edson Thiago Drumond",
+      "cpf": "748.517.476-24",
+      "salario": 1045,
+      "desconto": 78.38,
+      "dependentes": 1
+    },
+    {
+      "id": "673de350-54f9-47c5-8cad-4905011d35a0",
+      "nome": "Fátima Elza Tereza Castro",
+      "cpf": "701.118.872-08",
+      "salario": 5500,
+      "desconto": 628.95,
+      "dependentes": 0
+    },
+    {
+      "id": "2f2bb9bf-2c5c-4ca3-a30b-8be4bc2009d6",
+      "nome": "Sandra Giovanna Drumond",
+      "cpf": "715.890.756-25",
+      "salario": 4522,
+      "desconto": 492.03,
+      "dependentes": 3
+    },
+    {
+      "id": "225e0092-51a3-432d-a614-46f1eaff4614",
+      "nome": "Valentina Clara Nunes",
+      "cpf": "101.151.404-41",
+      "salario": 10000,
+      "desconto": 713.1,
+      "dependentes": 4
+    },
+    {
+      "nome": "Matheus Leandro de Souza",
+      "cpf": "093.623.586-12",
+      "salario": 10000.37,
+      "desconto": 170.64,
+      "dependentes": 1,
+      "id": "048eb52b-b1b5-4365-a1a6-b63c61077c8a"
+    },
+    {
+      "nome": "Laura Ferreira",
+      "cpf": "123.456.789-02",
+      "salario": 1234.57,
+      "desconto": 123.46,
+      "dependentes": 2,
+      "id": "badc8d67-f297-4962-bc8f-75bac1764fb9"
+    }
+  ]
+}
