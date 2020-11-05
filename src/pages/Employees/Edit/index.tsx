@@ -3,7 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
-import api from '../../../services/api';
+import { useEmployees } from '../../../hooks/employees';
+import { EmployeeFormattedProps } from '../../../utils/types';
 
 import getValidationErros from '../../../utils/getValidationErrors';
 
@@ -16,43 +17,32 @@ interface RouteParamsProps {
   id: string;
 }
 
-interface EmployeeProps {
-  nome: string;
-  cpf: string;
-  salario: string;
-  desconto: string;
-  dependentes: string;
-}
-
 const EmployeeEdit: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+
+  const { getEmployeeById, updateEmployee } = useEmployees();
 
   const routeParams = useParams() as RouteParamsProps;
   const history = useHistory();
 
-  const [employee, setEmployee] = useState({} as EmployeeProps);
+  const [employee, setEmployee] = useState({} as EmployeeFormattedProps);
 
   const getEmployee = useCallback(async () => {
     try {
-      const response = await api.get(`employees/${routeParams.id}`);
+      const response = await getEmployeeById(routeParams.id);
 
-      setEmployee({
-        ...response.data,
-        salario: response.data.salario.toString().replace('.', ','),
-        desconto: response.data.desconto.toString().replace('.', ','),
-        dependentes: response.data.dependentes.toString().replace('.', ','),
-      });
+      setEmployee(response);
     } catch (error) {
       console.log('erro');
     }
-  }, [routeParams.id]);
+  }, [getEmployeeById, routeParams.id]);
 
   useEffect(() => {
     getEmployee();
   }, [getEmployee]);
 
   const handleSubmited = useCallback(
-    async (data: EmployeeProps) => {
+    async (data: EmployeeFormattedProps) => {
       try {
         formRef.current?.setErrors({});
 
@@ -68,7 +58,8 @@ const EmployeeEdit: React.FC = () => {
           abortEarly: false,
         });
 
-        const params = {
+        updateEmployee({
+          id: employee.id,
           nome: data.nome,
           cpf: data.cpf,
           salario: parseFloat(
@@ -78,9 +69,7 @@ const EmployeeEdit: React.FC = () => {
             data.desconto.replace('R$', '').replace('.', '').replace(',', '.'),
           ),
           dependentes: parseInt(data.dependentes, 10),
-        };
-
-        await api.put(`employees/${routeParams.id}`, params);
+        });
 
         history.push('/');
       } catch (err) {
@@ -95,7 +84,7 @@ const EmployeeEdit: React.FC = () => {
         console.log('erro');
       }
     },
-    [history, routeParams.id],
+    [history, employee.id, updateEmployee],
   );
 
   return (

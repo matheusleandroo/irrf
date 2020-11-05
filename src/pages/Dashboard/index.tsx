@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus, FiEdit, FiTrash } from 'react-icons/fi';
 
-import api from '../../services/api';
+import { useEmployees } from '../../hooks/employees';
+import { EmployeeFormattedProps } from '../../utils/types';
 
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
@@ -11,37 +12,21 @@ import profile from '../../assets/profile.svg';
 
 import { Container } from './styles';
 
-interface EmployeeProps {
-  id: string;
-  nome: string;
-  cpf: string;
-  salario: string;
-  desconto: string;
-  dependentes: string;
-}
-
 const Dashboard: React.FC = () => {
+  const { allEmployees, deleteEmployee } = useEmployees();
+
   const [handleModal, setHandleModal] = useState(false);
 
-  const [employees, setEmployees] = useState([] as EmployeeProps[]);
-  const [employee, setEmployee] = useState({} as EmployeeProps);
+  const [employees, setEmployees] = useState([] as EmployeeFormattedProps[]);
+  const [employee, setEmployee] = useState({} as EmployeeFormattedProps);
 
   const getEmployees = useCallback(async () => {
     try {
-      const response = await api.get<EmployeeProps[]>('employees');
-
-      setEmployees(
-        response.data.map(item => ({
-          ...item,
-          salario: item.salario.toString().replace('.', ','),
-          desconto: item.desconto.toString().replace('.', ','),
-          dependentes: item.dependentes.toString().replace('.', ','),
-        })),
-      );
+      setEmployees(allEmployees);
     } catch (error) {
       console.log('erro');
     }
-  }, []);
+  }, [allEmployees]);
 
   const toggleModal = useCallback(() => {
     setHandleModal(!handleModal);
@@ -51,13 +36,11 @@ const Dashboard: React.FC = () => {
     try {
       toggleModal();
 
-      await api.delete(`employees/${employee.id}`);
-
-      getEmployees();
+      deleteEmployee(employee.id);
     } catch (error) {
       console.log('erro');
     }
-  }, [employee.id, getEmployees, toggleModal]);
+  }, [employee.id, deleteEmployee, toggleModal]);
 
   useEffect(() => {
     getEmployees();
@@ -112,9 +95,9 @@ const Dashboard: React.FC = () => {
                     <strong>Dependentes:</strong> {item.dependentes}
                   </div>
                   <div>
-                    <strong>Salário Base:</strong> R$123,45
-                    <strong>Desconto IRRF:</strong> R$123,45
-                    <strong>Salário Líquido:</strong> R$123,45
+                    <strong>Salário Base:</strong> R${item.salarioBase}
+                    <strong>Desconto IRRF:</strong> R${item.descontoIrrf}
+                    <strong>Salário Líquido:</strong> R${item.salarioLiquido}
                   </div>
                 </div>
               </div>

@@ -2,9 +2,9 @@ import React, { useCallback, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { v4 as uuidv4 } from 'uuid';
 
-import api from '../../../services/api';
+import { useEmployees } from '../../../hooks/employees';
+import { EmployeeFormattedProps } from '../../../utils/types';
 
 import getValidationErros from '../../../utils/getValidationErrors';
 
@@ -13,21 +13,15 @@ import Employee from '../../../components/Employee';
 
 import { Container } from '../styles';
 
-interface EmployeeProps {
-  nome: string;
-  cpf: string;
-  salario: string;
-  desconto: string;
-  dependentes: string;
-}
-
 const EmployeeAdd: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+
+  const { createEmployee } = useEmployees();
 
   const history = useHistory();
 
   const handleSubmited = useCallback(
-    async (data: EmployeeProps) => {
+    async (data: EmployeeFormattedProps) => {
       try {
         formRef.current?.setErrors({});
 
@@ -43,8 +37,8 @@ const EmployeeAdd: React.FC = () => {
           abortEarly: false,
         });
 
-        const params = {
-          id: uuidv4(),
+        createEmployee({
+          id: '',
           nome: data.nome,
           cpf: data.cpf,
           salario: parseFloat(
@@ -54,9 +48,7 @@ const EmployeeAdd: React.FC = () => {
             data.desconto.replace('R$', '').replace('.', '').replace(',', '.'),
           ),
           dependentes: parseInt(data.dependentes, 10),
-        };
-
-        await api.post('employees', params);
+        });
 
         history.push('/');
       } catch (err) {
@@ -71,7 +63,7 @@ const EmployeeAdd: React.FC = () => {
         console.log('erro');
       }
     },
-    [history],
+    [createEmployee, history],
   );
 
   return (

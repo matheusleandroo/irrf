@@ -50,7 +50,11 @@ const Employee: React.FC<EmployeeProps> = ({
                         'cpf',
                         formatCpf(e.target.value),
                       );
-                    else formRef.current?.setFieldValue('cpf', e.target.value);
+                    else
+                      formRef.current?.setFieldValue(
+                        'cpf',
+                        e.target.value.substring(0, 14),
+                      );
                   }}
                 />
               </div>
