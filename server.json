@@ -55,14 +55,6 @@
       "salario": 1234.57,
       "desconto": 123.46,
       "dependentes": 0
-    },
-    {
-      "id": "d3b86337-4b23-4b73-a1af-9437608c1944",
-      "nome": "Isabelle Nishimoto",
-      "cpf": "123.132.132-99",
-      "salario": 3520.99,
-      "desconto": 122.99,
-      "dependentes": 0
     }
   ]
 }

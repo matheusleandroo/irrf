@@ -11,6 +11,7 @@ import Modal from '../../components/Modal';
 import profile from '../../assets/profile.svg';
 
 import { Container, ContainerContent, EmployeeContent } from './styles';
+import { formatValue } from '../../utils/formatValue';
 
 const Dashboard: React.FC = () => {
   const { allEmployees, deleteEmployee } = useEmployees();
@@ -88,22 +89,27 @@ const Dashboard: React.FC = () => {
                       <strong>CPF:</strong> {item.cpf}
                     </p>
                     <p>
-                      <strong>Salário Bruto:</strong> R${item.salario}
+                      <strong>Salário Bruto:</strong>{' '}
+                      {formatValue(parseFloat(item.salario))}
                     </p>
                     <p>
-                      <strong>Desconto Previdência:</strong> R${item.desconto}
+                      <strong>Desconto Previdência:</strong>{' '}
+                      {formatValue(parseFloat(item.desconto))}
                     </p>
                     <p>
                       <strong>Dependentes:</strong> {item.dependentes}
                     </p>
                     <p>
-                      <strong>Salário Base:</strong> R${item.salarioBase}
+                      <strong>Salário Base:</strong>{' '}
+                      {formatValue(parseFloat(item.salarioBase))}
                     </p>
                     <p>
-                      <strong>Desconto IRRF:</strong> R${item.descontoIrrf}
+                      <strong>Desconto IRRF:</strong>{' '}
+                      {formatValue(parseFloat(item.descontoIrrf))}
                     </p>
                     <p>
-                      <strong>Salário Líquido:</strong> R${item.salarioLiquido}
+                      <strong>Salário Líquido:</strong>{' '}
+                      {formatValue(parseFloat(item.salarioLiquido))}
                     </p>
                   </div>
                 </div>
