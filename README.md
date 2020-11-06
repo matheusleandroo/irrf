@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# IRRF
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">
+  A simple project to manage your employees
+</h3>
 
-## Available Scripts
+<h1 align="center">
+  <img alt="Home" title="Home" src="https://raw.githubusercontent.com/matheusleandroo/irrf/master/src/assets/dashboard.png" width="400px" />
+  <img alt="Edit" title="Edit" src="https://raw.githubusercontent.com/matheusleandroo/irrf/master/src/assets/edit.png" width="400px" />
+</h1>
 
-In the project directory, you can run:
+<h1 align="center">
+  <img alt="Home" title="Home" src="https://raw.githubusercontent.com/matheusleandroo/irrf/master/src/assets/dahsboard_mobile.png" width="200px" />
+  <img alt="Cart" title="Cart" src="https://raw.githubusercontent.com/matheusleandroo/irrf/master/src/assets/edit_mobile.png" width="200px" />
+</h1>
 
-### `yarn start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<h3>Prerequisites</h3>
 
-### `yarn test`
+<h4>NodeJS</h4>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You need to install NodeJS on your computer before you can use "**IRRF**". You can install NodeJS by following <a href="https://nodejs.org/en/download/package-manager/">these instructions</a>.
 
-### `yarn build`
+Once you have completed the installation process, try typing **```npm -v```** into your command line. You should get a response with the version of NodeJS.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<h4>Yarn</h4>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Once you have NodeJs instaled, you need to install Yarn. You can install Yarn by following <a href="https://yarnpkg.com/en/docs/getting-started">these instructions</a>.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+After instalition, try typing **```yarn -v```** into your command line. You should get a response with the version of Yarn.
 
-### `yarn eject`
+It is recommended to install the extension ESLint, Prettier, EditorConfig and edit the code editor' settings:
+```
+  "files.eol": "\n",
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Deploy
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After clone repository, go to folder and follow this steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Run **`yarn global add json-server`** to install json-server;
+- Run **`yarn`** to install dependencies;
+- Run **`json-server server.json -p 3333 -d 3000`** to start api;
+- Run **`yarn start`** in another terminal to start application.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Now you can use "**IRRF**".
 
-## Learn More
+## Coverage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<h1 align="center">
+  <img alt="Coverage" title="Coverage" src="https://raw.githubusercontent.com/matheusleandroo/irrf/master/src/assets/coverage.png" width="400px" />
+</h1>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Built With
+
+<ul>
+  <li>TypeScript</li>
+  <li>Context</li>
+  <li>Axios</li>
+  <li>Styled Components</li>
+  <li>ESLint + Prettier + EditorConfig</li>
+</ul>
+
+## Authors
+
+<ul>
+  <li><a href="http://matheusleandro.com">Matheus Leandro</a></li>
+</ul>
+
+## License
+
+This project is licensed under the MIT License - see the <a href="https://github.com/matheusleandroo/rocketshoes/blob/master/LICENSE">LICENSE.md</a> file for details.
