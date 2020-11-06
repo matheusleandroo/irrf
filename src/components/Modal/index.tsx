@@ -18,7 +18,8 @@ const Modal: React.FC<ModalProps> = ({
       <ModalContent>
         <h1>Confirmação</h1>
         <p>
-          Tem certeza que deseja excluir o item <strong>{item}</strong>?
+          Tem certeza que deseja excluir o funcionário(a){' '}
+          <strong>{item}</strong>?
         </p>
         <div>
           <button type="button" onClick={saveFunction}>
