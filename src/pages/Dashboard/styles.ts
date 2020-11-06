@@ -47,6 +47,12 @@ export const EmployeeContent = styled.div`
   margin: 3rem 0;
   padding: 1rem 1rem 2rem;
   border-radius: 0.3rem;
+  border: 3px solid transparent;
+  transition: border 0.2s;
+
+  &:hover {
+    border: 3px solid var(--color-primary-lighter);
+  }
 
   background-color: var(--color-background-secundary);
   color: var(--color-text);
@@ -65,7 +71,7 @@ export const EmployeeContent = styled.div`
       height: 120px;
       width: 120px;
       border-radius: 50%;
-      border: 3px solid var(--color-background-darker);
+      border: 3px solid var(--color-primary-lighter);
       background: #c7cddf;
     }
   }

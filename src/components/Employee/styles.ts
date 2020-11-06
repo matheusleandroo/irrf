@@ -34,7 +34,7 @@ export const EmployeeContent = styled.div`
       height: 120px;
       width: 120px;
       border-radius: 50%;
-      border: 3px solid var(--color-background-darker);
+      border: 3px solid var(--color-primary-lighter);
       background: #c7cddf;
     }
   }
