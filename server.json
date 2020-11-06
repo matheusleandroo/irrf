@@ -47,14 +47,6 @@
       "desconto": 170.64,
       "dependentes": 1,
       "id": "048eb52b-b1b5-4365-a1a6-b63c61077c8a"
-    },
-    {
-      "id": "badc8d67-f297-4962-bc8f-75bac1764fb9",
-      "nome": "Laura Ferreira",
-      "cpf": "123.456.789-02",
-      "salario": 1234.57,
-      "desconto": 123.46,
-      "dependentes": 0
     }
   ]
 }
