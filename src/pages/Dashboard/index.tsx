@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus, FiEdit, FiTrash } from 'react-icons/fi';
 
@@ -16,17 +16,11 @@ import profile from '../../assets/profile.svg';
 import { Container, ContainerContent, EmployeeContent } from './styles';
 
 const Dashboard: React.FC = () => {
-  const { allEmployees, deleteEmployee } = useEmployees();
+  const { employees, loading, deleteEmployee } = useEmployees();
 
-  const [spinner, setSpinner] = useState(true);
   const [handleModal, setHandleModal] = useState(false);
 
-  const [employees, setEmployees] = useState([] as EmployeeFormattedProps[]);
   const [employee, setEmployee] = useState({} as EmployeeFormattedProps);
-
-  const getEmployees = useCallback(async () => {
-    setEmployees(allEmployees);
-  }, [allEmployees]);
 
   const toggleModal = useCallback(() => {
     setHandleModal(!handleModal);
@@ -37,10 +31,6 @@ const Dashboard: React.FC = () => {
 
     await deleteEmployee(employee.id);
   }, [employee.id, deleteEmployee, toggleModal]);
-
-  useEffect(() => {
-    getEmployees();
-  }, [getEmployees]);
 
   return (
     <Container>
@@ -60,7 +50,7 @@ const Dashboard: React.FC = () => {
           Adicionar
         </Link>
 
-        {employees && employees.length > 0 ? (
+        {!loading && employees && employees.length > 0 ? (
           <>
             {employees.map(item => (
               <EmployeeContent key={item.id}>
@@ -121,7 +111,7 @@ const Dashboard: React.FC = () => {
           </>
         ) : (
           <EmployeeContent>
-            {spinner ? <Spinner /> : <h3>Nenhum funcionário encontrado :(</h3>}
+            {loading ? <Spinner /> : <h3>Nenhum funcionário encontrado :(</h3>}
           </EmployeeContent>
         )}
       </ContainerContent>

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -18,16 +18,12 @@ import { Container } from '../styles';
 const EmployeeAdd: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const [loading, setLoading] = useState(false);
-
-  const { createEmployee } = useEmployees();
+  const { createEmployee, loading } = useEmployees();
 
   const history = useHistory();
 
   const handleSubmited = useCallback(
     async (data: EmployeeFormattedProps) => {
-      setLoading(true);
-
       try {
         formRef.current?.setErrors({});
 
@@ -69,8 +65,6 @@ const EmployeeAdd: React.FC = () => {
         }
 
         toast.error('Ocorreu um erro inesperado');
-      } finally {
-        setLoading(false);
       }
     },
     [createEmployee, history],

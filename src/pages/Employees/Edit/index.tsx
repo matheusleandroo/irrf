@@ -22,8 +22,7 @@ interface RouteParamsProps {
 const EmployeeEdit: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const [loading, setLoading] = useState(false);
-  const { getEmployeeById, updateEmployee } = useEmployees();
+  const { getEmployeeById, updateEmployee, loading } = useEmployees();
 
   const routeParams = useParams() as RouteParamsProps;
   const history = useHistory();
@@ -31,13 +30,9 @@ const EmployeeEdit: React.FC = () => {
   const [employee, setEmployee] = useState({} as EmployeeFormattedProps);
 
   const getEmployee = useCallback(async () => {
-    setLoading(true);
-
     const response = await getEmployeeById(routeParams.id);
 
     setEmployee(response);
-
-    setLoading(false);
   }, [getEmployeeById, routeParams.id]);
 
   useEffect(() => {
@@ -46,8 +41,6 @@ const EmployeeEdit: React.FC = () => {
 
   const handleSubmited = useCallback(
     async (data: EmployeeFormattedProps) => {
-      setLoading(true);
-
       try {
         formRef.current?.setErrors({});
 
@@ -87,8 +80,6 @@ const EmployeeEdit: React.FC = () => {
         }
 
         toast.error('Ocorreu um erro inesperado');
-      } finally {
-        setLoading(false);
       }
     },
     [history, employee.id, updateEmployee],
