@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import { shade, lighten } from 'polished';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export default createGlobalStyle`
  :root {
    /* Default */
@@ -35,7 +37,9 @@ export default createGlobalStyle`
     --color-primary-lighter: #d4c2ff;
     --color-primary-lighter-lighten: ${lighten(0.1, '#d4c2ff')};
     --color-primary-light: #bda5f6;
+    --color-title: #fff;
     --color-text: #6a6180;
+    --color-text-black: #000000;
     --color-text-lighten: ${lighten(0.2, '#6a6180')};
  }
 

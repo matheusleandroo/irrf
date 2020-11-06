@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
-  /* background-color: red; */
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   z-index: 99;
@@ -27,13 +26,14 @@ const appearFromTop = keyframes`
 `;
 
 export const ModalContent = styled.div`
-  /* background-color: blue; */
   background-color: var(--color-background);
   animation: ${appearFromTop} 1s;
   position: fixed;
   margin: 5%;
   padding: 5%;
   border-radius: 3px;
+  color: var(--color-text);
+
   h1 {
     font-size: 1.2rem;
     margin-bottom: 15px;

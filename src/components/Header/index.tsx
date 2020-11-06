@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
-import { Container } from './styles';
+import { Container, HeaderTop, HeaderBody } from './styles';
 
 interface HeaderProps {
   hasTopBarBack?: boolean;
@@ -16,18 +16,16 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <Container>
       {hasTopBarBack && (
-        <div>
+        <HeaderTop>
           <Link to={urlTopBarBack || '/'}>
             {hasTopBarBack && <FiArrowLeft size={20} />}
-            <p>{hasTopBarBack}</p>
           </Link>
-        </div>
+        </HeaderTop>
       )}
 
-      <div>
+      <HeaderBody>
         <h1>IRRF</h1>
-        <span>Genrenciar funcionários</span>
-      </div>
+      </HeaderBody>
     </Container>
   );
 };

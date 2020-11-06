@@ -10,7 +10,7 @@ import Modal from '../../components/Modal';
 
 import profile from '../../assets/profile.svg';
 
-import { Container } from './styles';
+import { Container, ContainerContent, EmployeeContent } from './styles';
 
 const Dashboard: React.FC = () => {
   const { allEmployees, deleteEmployee } = useEmployees();
@@ -21,11 +21,7 @@ const Dashboard: React.FC = () => {
   const [employee, setEmployee] = useState({} as EmployeeFormattedProps);
 
   const getEmployees = useCallback(async () => {
-    try {
-      setEmployees(allEmployees);
-    } catch (error) {
-      console.log('erro');
-    }
+    setEmployees(allEmployees);
   }, [allEmployees]);
 
   const toggleModal = useCallback(() => {
@@ -33,13 +29,9 @@ const Dashboard: React.FC = () => {
   }, [handleModal]);
 
   const handleDelete = useCallback(async () => {
-    try {
-      toggleModal();
+    toggleModal();
 
-      deleteEmployee(employee.id);
-    } catch (error) {
-      console.log('erro');
-    }
+    deleteEmployee(employee.id);
   }, [employee.id, deleteEmployee, toggleModal]);
 
   useEffect(() => {
@@ -48,6 +40,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
+      <Header />
+
       {handleModal && employee && (
         <Modal
           saveFunction={handleDelete}
@@ -56,10 +50,8 @@ const Dashboard: React.FC = () => {
         />
       )}
 
-      <Header />
-
-      <div>
-        <Link to="/employees/add" id="buttonAdd">
+      <ContainerContent>
+        <Link to="/employees/add" className="linkAdd">
           <FiPlus size={20} />
           Adicionar
         </Link>
@@ -67,9 +59,9 @@ const Dashboard: React.FC = () => {
         {employees && employees.length > 0 ? (
           <>
             {employees.map(item => (
-              <div key={item.id}>
+              <EmployeeContent key={item.id}>
                 <div>
-                  <Link to={`/employees/${item.id}/edit`}>
+                  <Link to={`/employees/${item.id}/edit`} title="Editar">
                     <FiEdit size={16} />
                   </Link>
 
@@ -79,36 +71,51 @@ const Dashboard: React.FC = () => {
                       setEmployee(item);
                       toggleModal();
                     }}
+                    title="Excluir"
                   />
                 </div>
 
-                <img src={profile} alt={item.nome} />
+                <div className="profileImg">
+                  <img src={profile} alt={item.nome} />
+                </div>
 
-                <div>
+                <div className="data">
                   <div>
-                    <strong>Nome:</strong> {item.nome}
-                    <strong>CPF:</strong> {item.cpf}
-                  </div>
-                  <div>
-                    <strong>Salário Bruto:</strong> R${item.salario}
-                    <strong>Desconto Previdência:</strong> R${item.desconto}
-                    <strong>Dependentes:</strong> {item.dependentes}
-                  </div>
-                  <div>
-                    <strong>Salário Base:</strong> R${item.salarioBase}
-                    <strong>Desconto IRRF:</strong> R${item.descontoIrrf}
-                    <strong>Salário Líquido:</strong> R${item.salarioLiquido}
+                    <p>
+                      <strong>Nome:</strong> {item.nome}
+                    </p>
+                    <p>
+                      <strong>CPF:</strong> {item.cpf}
+                    </p>
+                    <p>
+                      <strong>Salário Bruto:</strong> R${item.salario}
+                    </p>
+                    <p>
+                      <strong>Desconto Previdência:</strong> R${item.desconto}
+                    </p>
+                    <p>
+                      <strong>Dependentes:</strong> {item.dependentes}
+                    </p>
+                    <p>
+                      <strong>Salário Base:</strong> R${item.salarioBase}
+                    </p>
+                    <p>
+                      <strong>Desconto IRRF:</strong> R${item.descontoIrrf}
+                    </p>
+                    <p>
+                      <strong>Salário Líquido:</strong> R${item.salarioLiquido}
+                    </p>
                   </div>
                 </div>
-              </div>
+              </EmployeeContent>
             ))}
           </>
         ) : (
-          <div>
+          <EmployeeContent>
             <h3>Nenhum funcionário encontrado :(</h3>
-          </div>
+          </EmployeeContent>
         )}
-      </div>
+      </ContainerContent>
     </Container>
   );
 };

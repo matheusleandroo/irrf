@@ -6,6 +6,7 @@ import React, {
   useEffect,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 import api from '../services/api';
 
@@ -29,9 +30,13 @@ const EmployeesProvider: React.FC = ({ children }: any) => {
   );
 
   const getAllEmployees = useCallback(async () => {
-    const response = await api.get<EmployeeProps[]>('employees');
+    try {
+      const response = await api.get<EmployeeProps[]>('employees');
 
-    setAllEmployees(response.data.map(item => getEmployeeFormatted(item)));
+      setAllEmployees(response.data.map(item => getEmployeeFormatted(item)));
+    } catch (error) {
+      toast.error('Ocorreu um erro inesperado');
+    }
   }, []);
 
   const getEmployeeById = useCallback(async (id: string) => {
@@ -42,52 +47,64 @@ const EmployeesProvider: React.FC = ({ children }: any) => {
 
   const deleteEmployee = useCallback(
     async (id: string) => {
-      const employeeIndex = allEmployees.findIndex(f => f.id === id);
+      try {
+        const employeeIndex = allEmployees.findIndex(f => f.id === id);
 
-      await api.delete(`employees/${id}`);
+        await api.delete(`employees/${id}`);
 
-      const newAllEmployees = allEmployees;
-      newAllEmployees.splice(employeeIndex, 1);
+        const newAllEmployees = allEmployees;
+        newAllEmployees.splice(employeeIndex, 1);
 
-      setAllEmployees([...newAllEmployees]);
+        setAllEmployees([...newAllEmployees]);
+      } catch (error) {
+        toast.error('Ocorreu um erro inesperado');
+      }
     },
     [allEmployees],
   );
 
   const createEmployee = useCallback(
     async (data: EmployeeProps) => {
-      const { nome, cpf, salario, desconto, dependentes } = data;
+      try {
+        const { nome, cpf, salario, desconto, dependentes } = data;
 
-      const params = {
-        id: uuidv4(),
-        nome,
-        cpf,
-        salario,
-        desconto,
-        dependentes,
-      };
+        const params = {
+          id: uuidv4(),
+          nome,
+          cpf,
+          salario,
+          desconto,
+          dependentes,
+        };
 
-      const response = await api.post('employees', params);
+        const response = await api.post('employees', params);
 
-      setAllEmployees([...allEmployees, getEmployeeFormatted(response.data)]);
+        setAllEmployees([...allEmployees, getEmployeeFormatted(response.data)]);
+      } catch (error) {
+        toast.error('Ocorreu um erro inesperado');
+      }
     },
     [allEmployees],
   );
 
   const updateEmployee = useCallback(
     async (data: EmployeeProps) => {
-      const { id } = data;
+      try {
+        const { id } = data;
 
-      const employeeIndex = allEmployees.findIndex(f => f.id === id);
+        const employeeIndex = allEmployees.findIndex(f => f.id === id);
 
-      const response = await api.put(`employees/${id}`, data);
+        const response = await api.put(`employees/${id}`, data);
 
-      const newAllEmployees = allEmployees;
-      const employeedFormatted = getEmployeeFormatted(response.data);
+        const newAllEmployees = allEmployees;
+        const employeedFormatted = getEmployeeFormatted(response.data);
 
-      newAllEmployees[employeeIndex] = employeedFormatted;
+        newAllEmployees[employeeIndex] = employeedFormatted;
 
-      setAllEmployees([...newAllEmployees]);
+        setAllEmployees([...newAllEmployees]);
+      } catch (error) {
+        toast.error('Ocorreu um erro inesperado');
+      }
     },
     [allEmployees],
   );

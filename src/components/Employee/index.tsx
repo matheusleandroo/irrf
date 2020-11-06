@@ -9,7 +9,7 @@ import InputCurrency from '../InputCurrency';
 import ButtonsSubmit from '../ButtonsSubmit';
 
 import profile from '../../assets/profile.svg';
-import { Container } from './styles';
+import { Container, ContainerContent, EmployeeContent } from './styles';
 
 interface EmployeeProps {
   title: 'Cadastro' | 'Edição';
@@ -26,80 +26,86 @@ const Employee: React.FC<EmployeeProps> = ({
 }: EmployeeProps) => {
   return (
     <Container>
-      <div>
-        <strong>IRRF</strong> / {title}
-      </div>
-
-      <div>
-        <img src={profile} alt="Perfil" />
-
+      <ContainerContent>
         <div>
-          <Form ref={formRef} onSubmit={onSubmit} initialData={initialData}>
-            <div>
-              <div>
-                <p>Nome</p>
-                <Input name="nome" data-testid="nome" />
-              </div>
-              <div>
-                <p>CPF</p>
-                <Input
-                  name="cpf"
-                  data-testid="cpf"
-                  onChange={e => {
-                    if (e.target.value.length <= 14)
-                      formRef.current?.setFieldValue(
-                        'cpf',
-                        formatCpf(e.target.value),
-                      );
-                    else
-                      formRef.current?.setFieldValue(
-                        'cpf',
-                        e.target.value.substring(0, 14),
-                      );
-                  }}
-                />
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <p>Salário Bruto</p>
-                <InputCurrency
-                  name="salario"
-                  data-testid="salario"
-                  type="text"
-                />
-              </div>
-              <div>
-                <p>Desconto Previdência</p>
-                <InputCurrency
-                  name="desconto"
-                  data-testid="desconto"
-                  type="text"
-                />
-              </div>
-              <div>
-                <p>Dependentes</p>
-                <Input
-                  name="dependentes"
-                  data-testid="dependentes"
-                  type="number"
-                  onChange={e => {
-                    if (formatNumber(e.target.value))
-                      formRef.current?.setFieldValue(
-                        'dependentes',
-                        e.target.value,
-                      );
-                    else formRef.current?.setFieldValue('dependentes', '0');
-                  }}
-                />
-              </div>
-            </div>
-
-            <ButtonsSubmit cancelUrl="/" />
-          </Form>
+          <strong>IRRF</strong> / {title}
         </div>
-      </div>
+
+        <EmployeeContent>
+          <div className="profileImg">
+            <img src={profile} alt="Perfil" />
+          </div>
+
+          <div>
+            <Form ref={formRef} onSubmit={onSubmit} initialData={initialData}>
+              <div className="form">
+                <div>
+                  <p>Nome</p>
+                  <Input name="nome" data-testid="nome" />
+                </div>
+              </div>
+
+              <div className="form grid">
+                <div>
+                  <p>CPF</p>
+                  <Input
+                    name="cpf"
+                    data-testid="cpf"
+                    onChange={e => {
+                      if (e.target.value.length <= 14)
+                        formRef.current?.setFieldValue(
+                          'cpf',
+                          formatCpf(e.target.value),
+                        );
+                      else
+                        formRef.current?.setFieldValue(
+                          'cpf',
+                          e.target.value.substring(0, 14),
+                        );
+                    }}
+                  />
+                </div>
+                <div>
+                  <p>Dependentes</p>
+                  <Input
+                    name="dependentes"
+                    data-testid="dependentes"
+                    type="number"
+                    onChange={e => {
+                      if (formatNumber(e.target.value))
+                        formRef.current?.setFieldValue(
+                          'dependentes',
+                          e.target.value,
+                        );
+                      else formRef.current?.setFieldValue('dependentes', '0');
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="form grid">
+                <div>
+                  <p>Salário Bruto</p>
+                  <InputCurrency
+                    name="salario"
+                    data-testid="salario"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <p>Desconto Previdência</p>
+                  <InputCurrency
+                    name="desconto"
+                    data-testid="desconto"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <ButtonsSubmit cancelUrl="/" />
+            </Form>
+          </div>
+        </EmployeeContent>
+      </ContainerContent>
     </Container>
   );
 };
