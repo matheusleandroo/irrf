@@ -38,12 +38,13 @@ const Employee: React.FC<EmployeeProps> = ({
             <div>
               <div>
                 <p>Nome</p>
-                <Input name="nome" />
+                <Input name="nome" data-testid="nome" />
               </div>
               <div>
                 <p>CPF</p>
                 <Input
                   name="cpf"
+                  data-testid="cpf"
                   onChange={e => {
                     if (e.target.value.length <= 14)
                       formRef.current?.setFieldValue(
@@ -63,16 +64,25 @@ const Employee: React.FC<EmployeeProps> = ({
             <div>
               <div>
                 <p>Salário Bruto</p>
-                <InputCurrency name="salario" type="text" />
+                <InputCurrency
+                  name="salario"
+                  data-testid="salario"
+                  type="text"
+                />
               </div>
               <div>
                 <p>Desconto Previdência</p>
-                <InputCurrency name="desconto" type="text" />
+                <InputCurrency
+                  name="desconto"
+                  data-testid="desconto"
+                  type="text"
+                />
               </div>
               <div>
                 <p>Dependentes</p>
                 <Input
                   name="dependentes"
+                  data-testid="dependentes"
                   type="number"
                   onChange={e => {
                     if (formatNumber(e.target.value))

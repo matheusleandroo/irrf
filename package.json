@@ -32,7 +32,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll false",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/pages/Employees/**/*.tsx",
+      "src/utils/*.ts",
+      "src/hooks/*.tsx",
+      "!src/hooks/index.tsx"
+    ]
   },
   "browserslist": {
     "production": [
@@ -47,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.4.2",
     "@types/lodash": "^4.14.164",
     "@types/react-router-dom": "^5.1.6",
     "@types/react-text-mask": "^5.4.6",
@@ -55,6 +65,7 @@
     "@types/yup": "^0.29.9",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
+    "axios-mock-adapter": "^1.19.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
@@ -64,6 +75,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "react-test-renderer": "^17.0.1"
   }
 }

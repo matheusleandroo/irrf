@@ -42,11 +42,16 @@ const EmployeesProvider: React.FC = ({ children }: any) => {
 
   const deleteEmployee = useCallback(
     async (id: string) => {
+      const employeeIndex = allEmployees.findIndex(f => f.id === id);
+
       await api.delete(`employees/${id}`);
 
-      getAllEmployees();
+      const newAllEmployees = allEmployees;
+      newAllEmployees.splice(employeeIndex, 1);
+
+      setAllEmployees([...newAllEmployees]);
     },
-    [getAllEmployees],
+    [allEmployees],
   );
 
   const createEmployee = useCallback(
@@ -62,20 +67,29 @@ const EmployeesProvider: React.FC = ({ children }: any) => {
         dependentes,
       };
 
-      await api.post('employees', params);
+      const response = await api.post('employees', params);
 
-      getAllEmployees();
+      setAllEmployees([...allEmployees, getEmployeeFormatted(response.data)]);
     },
-    [getAllEmployees],
+    [allEmployees],
   );
 
   const updateEmployee = useCallback(
     async (data: EmployeeProps) => {
-      await api.put(`employees/${data.id}`, data);
+      const { id } = data;
 
-      getAllEmployees();
+      const employeeIndex = allEmployees.findIndex(f => f.id === id);
+
+      const response = await api.put(`employees/${id}`, data);
+
+      const newAllEmployees = allEmployees;
+      const employeedFormatted = getEmployeeFormatted(response.data);
+
+      newAllEmployees[employeeIndex] = employeedFormatted;
+
+      setAllEmployees([...newAllEmployees]);
     },
-    [getAllEmployees],
+    [allEmployees],
   );
 
   useEffect(() => {
