@@ -27,7 +27,7 @@ describe('Employees hook', () => {
 
     await waitForNextUpdate();
 
-    expect(result.current.allEmployees).toEqual([
+    expect(result.current.employees).toEqual([
       {
         id: 'user-id',
         nome: 'John Doe',
@@ -62,7 +62,7 @@ describe('Employees hook', () => {
 
     await waitForNextUpdate();
 
-    expect(result.current.allEmployees).toEqual([
+    expect(result.current.employees).toEqual([
       {
         id: 'user-id',
         nome: 'John Doe',
@@ -106,7 +106,7 @@ describe('Employees hook', () => {
 
     await waitForNextUpdate();
 
-    expect(result.current.allEmployees).toEqual([
+    expect(result.current.employees).toEqual([
       {
         id: 'user-id',
         nome: 'John Doe',
@@ -128,7 +128,7 @@ describe('Employees hook', () => {
 
     await waitForNextUpdate();
 
-    expect(result.current.allEmployees).toEqual([
+    expect(result.current.employees).toEqual([
       {
         id: 'user-id',
         nome: 'John Doe',
@@ -163,7 +163,7 @@ describe('Employees hook', () => {
 
     await waitForNextUpdate();
 
-    expect(result.current.allEmployees).toEqual([
+    expect(result.current.employees).toEqual([
       {
         id: 'user-id',
         nome: 'John Doe',
@@ -185,6 +185,6 @@ describe('Employees hook', () => {
 
     await waitForNextUpdate();
 
-    expect(result.current.allEmployees.length).toEqual(0);
+    expect(result.current.employees.length).toEqual(0);
   });
 });
