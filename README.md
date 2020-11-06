@@ -52,7 +52,7 @@ Now you can use "**IRRF**".
 ## Coverage
 
 <h1 align="center">
-  <img alt="Coverage" title="Coverage" src="https://raw.githubusercontent.com/matheusleandroo/irrf/master/src/assets/coverage.png" width="400px" />
+  <img alt="Coverage" title="Coverage" src="https://raw.githubusercontent.com/matheusleandroo/irrf/master/src/assets/test_coverage.png" width="400px" />
 </h1>
 
 ## Built With
