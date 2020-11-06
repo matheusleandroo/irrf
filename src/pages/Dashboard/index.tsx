@@ -83,26 +83,32 @@ const Dashboard: React.FC = () => {
                     </p>
                     <p>
                       <strong>Salário Bruto:</strong>{' '}
-                      {formatValue(parseFloat(item.salario))}
+                      {formatValue(parseFloat(item.salario.replace(',', '.')))}
                     </p>
                     <p>
                       <strong>Desconto Previdência:</strong>{' '}
-                      {formatValue(parseFloat(item.desconto))}
+                      {formatValue(parseFloat(item.desconto.replace(',', '.')))}
                     </p>
                     <p>
                       <strong>Dependentes:</strong> {item.dependentes}
                     </p>
                     <p>
                       <strong>Salário Base:</strong>{' '}
-                      {formatValue(parseFloat(item.salarioBase))}
+                      {formatValue(
+                        parseFloat(item.salarioBase.replace(',', '.')),
+                      )}
                     </p>
                     <p>
                       <strong>Desconto IRRF:</strong>{' '}
-                      {formatValue(parseFloat(item.descontoIrrf))}
+                      {formatValue(
+                        parseFloat(item.descontoIrrf.replace(',', '.')),
+                      )}
                     </p>
                     <p>
                       <strong>Salário Líquido:</strong>{' '}
-                      {formatValue(parseFloat(item.salarioLiquido))}
+                      {formatValue(
+                        parseFloat(item.salarioLiquido.replace(',', '.')),
+                      )}
                     </p>
                   </div>
                 </div>
