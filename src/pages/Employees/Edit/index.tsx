@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { useEmployees } from '../../../hooks/employees';
 import { EmployeeFormattedProps } from '../../../utils/types';
@@ -28,13 +29,9 @@ const EmployeeEdit: React.FC = () => {
   const [employee, setEmployee] = useState({} as EmployeeFormattedProps);
 
   const getEmployee = useCallback(async () => {
-    try {
-      const response = await getEmployeeById(routeParams.id);
+    const response = await getEmployeeById(routeParams.id);
 
-      setEmployee(response);
-    } catch (error) {
-      console.log('erro');
-    }
+    setEmployee(response);
   }, [getEmployeeById, routeParams.id]);
 
   useEffect(() => {
@@ -81,7 +78,7 @@ const EmployeeEdit: React.FC = () => {
           return;
         }
 
-        console.log('erro');
+        toast.error('Ocorreu um erro inesperado');
       }
     },
     [history, employee.id, updateEmployee],

@@ -56,6 +56,8 @@ const EmployeesProvider: React.FC = ({ children }: any) => {
         newAllEmployees.splice(employeeIndex, 1);
 
         setAllEmployees([...newAllEmployees]);
+
+        toast.success('Funcionário(a) excluído(a) com sucesso');
       } catch (error) {
         toast.error('Ocorreu um erro inesperado');
       }
@@ -80,6 +82,8 @@ const EmployeesProvider: React.FC = ({ children }: any) => {
         const response = await api.post('employees', params);
 
         setAllEmployees([...allEmployees, getEmployeeFormatted(response.data)]);
+
+        toast.success('Funcionário(a) adicionado(a) com sucesso');
       } catch (error) {
         toast.error('Ocorreu um erro inesperado');
       }
@@ -102,6 +106,8 @@ const EmployeesProvider: React.FC = ({ children }: any) => {
         newAllEmployees[employeeIndex] = employeedFormatted;
 
         setAllEmployees([...newAllEmployees]);
+
+        toast.success('Funcionário(a) atualizado(a) com sucesso');
       } catch (error) {
         toast.error('Ocorreu um erro inesperado');
       }

@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { useEmployees } from '../../../hooks/employees';
 import { EmployeeFormattedProps } from '../../../utils/types';
@@ -27,7 +28,9 @@ const EmployeeAdd: React.FC = () => {
 
         const schema = Yup.object().shape({
           nome: Yup.string().required('Campo obrigatório'),
-          cpf: Yup.string().required('Campo obrigatório'),
+          cpf: Yup.string()
+            .required('Campo obrigatório')
+            .min(14, 'Campo inválido'),
           salario: Yup.string().required('Campo obrigatório'),
           desconto: Yup.string().required('Campo obrigatório'),
           dependentes: Yup.string().required('Campo obrigatório'),
@@ -60,7 +63,7 @@ const EmployeeAdd: React.FC = () => {
           return;
         }
 
-        console.log('erro');
+        toast.error('Ocorreu um erro inesperado');
       }
     },
     [createEmployee, history],
