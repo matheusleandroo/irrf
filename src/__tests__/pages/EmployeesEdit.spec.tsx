@@ -20,6 +20,17 @@ jest.mock('../../hooks/employees', () => {
   return {
     useEmployees: () => ({
       updateEmployee: jest.fn(),
+      getEmployeeById: () => ({
+        id: 'user-id',
+        nome: 'John Doe',
+        cpf: '999.999.999-99',
+        salario: '999,99',
+        desconto: '9,99',
+        dependentes: '0',
+        salarioBase: '990',
+        descontoIrrf: '0',
+        salarioLiquido: '990',
+      }),
     }),
   };
 });
