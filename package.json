@@ -41,10 +41,8 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/pages/Employees/**/*.tsx",
-      "src/utils/*.ts",
-      "src/hooks/*.tsx",
-      "!src/hooks/index.tsx"
+      "src/pages/Employees/Add/*.tsx",
+      "src/utils/*.ts"
     ]
   },
   "browserslist": {

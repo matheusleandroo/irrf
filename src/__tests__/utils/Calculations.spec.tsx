@@ -1,4 +1,7 @@
-import { getAliquotPortion } from '../../utils/calculations';
+import {
+  getAliquotPortion,
+  getEmployeeFormatted,
+} from '../../utils/calculations';
 
 describe('Calculations functions', () => {
   it('should be able to calcutate aliquot and portion', () => {
@@ -25,6 +28,29 @@ describe('Calculations functions', () => {
     expect(getAliquotPortion(5000)).toEqual({
       aliquot: 27.5,
       portion: 869.36,
+    });
+  });
+
+  it('should be able to get employee formatted', () => {
+    expect(
+      getEmployeeFormatted({
+        id: 'user-id',
+        nome: 'John Doe',
+        cpf: '999.999.999-99',
+        salario: 999.99,
+        desconto: 9.99,
+        dependentes: 0,
+      }),
+    ).toEqual({
+      id: 'user-id',
+      nome: 'John Doe',
+      cpf: '999.999.999-99',
+      salario: '999,99',
+      desconto: '9,99',
+      dependentes: '0',
+      salarioBase: '990',
+      descontoIrrf: '0',
+      salarioLiquido: '990',
     });
   });
 });
