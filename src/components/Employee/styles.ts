@@ -16,6 +16,12 @@ export const ContainerContent = styled.div`
   margin: 3rem 0;
   padding: 1rem 0.7rem;
   border-radius: 0.3rem;
+  border: 3px solid transparent;
+  transition: border 0.2s;
+
+  &:hover {
+    border: 3px solid var(--color-primary-lighter);
+  }
 
   background-color: var(--color-background-secundary);
   color: var(--color-text);
