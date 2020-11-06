@@ -63,7 +63,7 @@ const EmployeeEdit: React.FC = () => {
           abortEarly: false,
         });
 
-        updateEmployee({
+        await updateEmployee({
           id: employee.id,
           nome: data.nome,
           cpf: data.cpf,

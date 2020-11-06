@@ -7,6 +7,7 @@ import { useEmployees } from '../../hooks/employees';
 import { formatValue } from '../../utils/formatValue';
 import { EmployeeFormattedProps } from '../../utils/types';
 
+import Spinner from '../../components/Spinner';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 
@@ -17,6 +18,7 @@ import { Container, ContainerContent, EmployeeContent } from './styles';
 const Dashboard: React.FC = () => {
   const { allEmployees, deleteEmployee } = useEmployees();
 
+  const [spinner, setSpinner] = useState(true);
   const [handleModal, setHandleModal] = useState(false);
 
   const [employees, setEmployees] = useState([] as EmployeeFormattedProps[]);
@@ -33,7 +35,7 @@ const Dashboard: React.FC = () => {
   const handleDelete = useCallback(async () => {
     toggleModal();
 
-    deleteEmployee(employee.id);
+    await deleteEmployee(employee.id);
   }, [employee.id, deleteEmployee, toggleModal]);
 
   useEffect(() => {
@@ -119,7 +121,7 @@ const Dashboard: React.FC = () => {
           </>
         ) : (
           <EmployeeContent>
-            <h3>Nenhum funcionário encontrado :(</h3>
+            {spinner ? <Spinner /> : <h3>Nenhum funcionário encontrado :(</h3>}
           </EmployeeContent>
         )}
       </ContainerContent>
