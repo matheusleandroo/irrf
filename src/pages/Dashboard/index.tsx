@@ -13,7 +13,7 @@ import Modal from '../../components/Modal';
 
 import profile from '../../assets/profile.svg';
 
-import { Container, ContainerContent, EmployeeContent } from './styles';
+import { Container, ContainerContent, EmployeeContent, NoBody } from './styles';
 
 const Dashboard: React.FC = () => {
   const { employees, loading, deleteEmployee } = useEmployees();
@@ -110,9 +110,9 @@ const Dashboard: React.FC = () => {
             ))}
           </>
         ) : (
-          <EmployeeContent>
+          <NoBody>
             {loading ? <Spinner /> : <h3>Nenhum funcionário encontrado :(</h3>}
-          </EmployeeContent>
+          </NoBody>
         )}
       </ContainerContent>
     </Container>

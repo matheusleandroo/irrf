@@ -121,3 +121,23 @@ export const EmployeeContent = styled.div`
     }
   }
 `;
+
+export const NoBody = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  margin: 3rem 0;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  border: 3px solid transparent;
+  transition: border 0.2s;
+
+  &:hover {
+    border: 3px solid var(--color-primary-lighter);
+  }
+
+  background-color: var(--color-background-secundary);
+  color: var(--color-text);
+`;
