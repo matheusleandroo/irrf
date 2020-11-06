@@ -5,10 +5,11 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import { useEmployees } from '../../../hooks/employees';
-import { EmployeeFormattedProps } from '../../../utils/types';
 
+import { EmployeeFormattedProps } from '../../../utils/types';
 import getValidationErros from '../../../utils/getValidationErrors';
 
+import Loading from '../../../components/Loading';
 import Header from '../../../components/Header';
 import Employee from '../../../components/Employee';
 
@@ -21,6 +22,7 @@ interface RouteParamsProps {
 const EmployeeEdit: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState(false);
   const { getEmployeeById, updateEmployee } = useEmployees();
 
   const routeParams = useParams() as RouteParamsProps;
@@ -29,9 +31,13 @@ const EmployeeEdit: React.FC = () => {
   const [employee, setEmployee] = useState({} as EmployeeFormattedProps);
 
   const getEmployee = useCallback(async () => {
+    setLoading(true);
+
     const response = await getEmployeeById(routeParams.id);
 
     setEmployee(response);
+
+    setLoading(false);
   }, [getEmployeeById, routeParams.id]);
 
   useEffect(() => {
@@ -40,6 +46,8 @@ const EmployeeEdit: React.FC = () => {
 
   const handleSubmited = useCallback(
     async (data: EmployeeFormattedProps) => {
+      setLoading(true);
+
       try {
         formRef.current?.setErrors({});
 
@@ -79,6 +87,8 @@ const EmployeeEdit: React.FC = () => {
         }
 
         toast.error('Ocorreu um erro inesperado');
+      } finally {
+        setLoading(false);
       }
     },
     [history, employee.id, updateEmployee],
@@ -86,6 +96,8 @@ const EmployeeEdit: React.FC = () => {
 
   return (
     <Container>
+      {loading && <Loading />}
+
       <Header hasTopBarBack />
 
       <Employee

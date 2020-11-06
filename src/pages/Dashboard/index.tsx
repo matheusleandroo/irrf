@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { FiPlus, FiEdit, FiTrash } from 'react-icons/fi';
 
 import { useEmployees } from '../../hooks/employees';
+
+import { formatValue } from '../../utils/formatValue';
 import { EmployeeFormattedProps } from '../../utils/types';
 
 import Header from '../../components/Header';
@@ -11,7 +13,6 @@ import Modal from '../../components/Modal';
 import profile from '../../assets/profile.svg';
 
 import { Container, ContainerContent, EmployeeContent } from './styles';
-import { formatValue } from '../../utils/formatValue';
 
 const Dashboard: React.FC = () => {
   const { allEmployees, deleteEmployee } = useEmployees();

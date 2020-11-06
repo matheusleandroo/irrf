@@ -1,14 +1,15 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import { useEmployees } from '../../../hooks/employees';
-import { EmployeeFormattedProps } from '../../../utils/types';
 
+import { EmployeeFormattedProps } from '../../../utils/types';
 import getValidationErros from '../../../utils/getValidationErrors';
 
+import Loading from '../../../components/Loading';
 import Header from '../../../components/Header';
 import Employee from '../../../components/Employee';
 
@@ -17,12 +18,16 @@ import { Container } from '../styles';
 const EmployeeAdd: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState(false);
+
   const { createEmployee } = useEmployees();
 
   const history = useHistory();
 
   const handleSubmited = useCallback(
     async (data: EmployeeFormattedProps) => {
+      setLoading(true);
+
       try {
         formRef.current?.setErrors({});
 
@@ -40,7 +45,7 @@ const EmployeeAdd: React.FC = () => {
           abortEarly: false,
         });
 
-        createEmployee({
+        await createEmployee({
           id: '',
           nome: data.nome,
           cpf: data.cpf,
@@ -64,6 +69,8 @@ const EmployeeAdd: React.FC = () => {
         }
 
         toast.error('Ocorreu um erro inesperado');
+      } finally {
+        setLoading(false);
       }
     },
     [createEmployee, history],
@@ -71,6 +78,8 @@ const EmployeeAdd: React.FC = () => {
 
   return (
     <Container>
+      {loading && <Loading />}
+
       <Header hasTopBarBack />
 
       <Employee
